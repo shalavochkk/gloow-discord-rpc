@@ -9,33 +9,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const trackTitle = document.getElementById('trackTitle');
   const trackArtist = document.getElementById('trackArtist');
   
-  // Проверка статуса подключения
   chrome.runtime.sendMessage({ type: 'GET_STATUS' }, (response) => {
+    if (chrome.runtime.lastError) {
+      statusDot.classList.add('disconnected');
+      statusText.textContent = 'Ошибка расширения';
+      return;
+    }
     if (response && response.connected) {
       statusDot.classList.add('connected');
       statusText.textContent = 'Мост подключён';
     } else {
       statusDot.classList.add('disconnected');
-      statusText.textContent = 'Мост не подключён';
+      statusText.textContent = 'Мост не подключён (запусти bridge)';
+    }
+    
+    if (response && response.lastData && response.lastData.playing) {
+      showTrack(response.lastData);
     }
   });
   
-  // Получить текущий трек
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs[0] && tabs[0].url && tabs[0].url.includes('gloowroom.com')) {
       chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_CURRENT_TRACK' }, (response) => {
+        if (chrome.runtime.lastError) return;
         if (response && response.playing && response.title) {
-          trackInfo.style.display = 'flex';
-          noTrack.style.display = 'none';
-          trackTitle.textContent = response.title;
-          trackArtist.textContent = response.artist || 'Unknown';
-          if (response.cover) {
-            trackCover.src = response.cover;
-          } else {
-            trackCover.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><rect fill="%232a2a2a" width="60" height="60"/><text x="30" y="35" font-size="20" fill="%23666" text-anchor="middle">♪</text></svg>';
-          }
+          showTrack(response);
         }
       });
     }
   });
+  
+  function showTrack(track) {
+    trackInfo.style.display = 'flex';
+    noTrack.style.display = 'none';
+    trackTitle.textContent = track.title;
+    trackArtist.textContent = track.artist || 'Unknown';
+    if (track.cover) {
+      trackCover.src = track.cover;
+    } else {
+      trackCover.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><rect fill="#2a2a2a" width="60" height="60"/><text x="30" y="38" font-size="24" fill="#a855f7" text-anchor="middle">♫</text></svg>');
+    }
+  }
 });
