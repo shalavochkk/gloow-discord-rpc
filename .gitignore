@@ -1,0 +1,11 @@
+node_modules/
+bridge/node_modules/
+bridge/*.json
+!bridge/package.json
+!bridge/config.json
+!bridge/manifest.json
+extension/icons/*.png
+*.bat
+*.sh
+!scripts/*.sh
+!scripts/*.ps1

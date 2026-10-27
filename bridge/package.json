@@ -1,0 +1,22 @@
+{
+  "name": "gloow-discord-rpc-bridge",
+  "version": "1.0.0",
+  "description": "Native Messaging bridge for Gloowroom Discord RPC",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "install-host": "node scripts/install-host.js"
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1"
+  },
+  "keywords": [
+    "discord",
+    "rpc",
+    "gloowroom",
+    "presence"
+  ],
+  "author": "shalavochkk",
+  "license": "MIT"
+}

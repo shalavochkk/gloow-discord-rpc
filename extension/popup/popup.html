@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gloowroom Discord RPC</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Gloowroom RPC</h1>
+    </div>
+    
+    <div class="status" id="status">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusText">Проверка...</span>
+    </div>
+    
+    <div class="track-info" id="trackInfo" style="display: none;">
+      <div class="track-cover">
+        <img id="trackCover" src="" alt="">
+      </div>
+      <div class="track-details">
+        <div class="track-title" id="trackTitle"></div>
+        <div class="track-artist" id="trackArtist"></div>
+      </div>
+    </div>
+    
+    <div class="no-track" id="noTrack">
+      <p>Откройте gloowroom.com и включите трек</p>
+    </div>
+    
+    <div class="footer">
+      <a href="https://github.com/shalavochkk/gloow-discord-rpc" target="_blank">GitHub</a>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

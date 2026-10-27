@@ -1,0 +1,6 @@
+{
+  "clientId": "YOUR_DISCORD_APP_CLIENT_ID",
+  "largeImageKey": "gloowroom",
+  "largeImageText": "gloowroom.com",
+  "updateInterval": 1000
+}

@@ -1,0 +1,16 @@
+{
+  "name": "gloow-discord-rpc",
+  "version": "1.0.0",
+  "description": "Discord Rich Presence for gloowroom.com",
+  "scripts": {
+    "install:host:win": "powershell -ExecutionPolicy Bypass -File scripts/install-host.ps1",
+    "install:host:unix": "bash scripts/install-host.sh",
+    "bridge": "cd bridge && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shalavochkk/gloow-discord-rpc.git"
+  },
+  "author": "shalavochkk",
+  "license": "MIT"
+}

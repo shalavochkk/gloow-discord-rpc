@@ -1,0 +1,9 @@
+{
+  "name": "com.gloowroom.discordrpc",
+  "description": "Gloowroom Discord RPC Native Host",
+  "path": "HOST_PATH",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://EXTENSION_ID/"
+  ]
+}
