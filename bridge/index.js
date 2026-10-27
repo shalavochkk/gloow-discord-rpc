@@ -15,7 +15,6 @@ const rpc = new DiscordRPC.Client({ transport: 'ipc' });
 let currentTrack = null;
 let startTimestamp = null;
 
-// Native Messaging protocol
 function sendMessage(msg) {
   const buffer = Buffer.from(JSON.stringify(msg));
   const header = Buffer.alloc(4);
@@ -57,11 +56,11 @@ async function setActivity() {
   
   const activity = {
     details: currentTrack.title || 'Unknown Track',
-    state: currentTrack.artist || 'Unknown Artist',
-    largeImageKey: config.largeImageKey,
-    largeImageText: config.largeImageText,
-    smallImageKey: 'playing',
-    smallImageText: 'Слушает',
+    state: currentTrack.artist ? `by ${currentTrack.artist}` : 'Unknown Artist',
+    largeImageKey: 'gloowroom',
+    largeImageText: 'gloowroom.com',
+    smallImageKey: 'play',
+    smallImageText: 'Listening',
     instance: false,
   };
   
@@ -71,6 +70,10 @@ async function setActivity() {
   
   activity.startTimestamp = startTimestamp;
   
+  if (currentTrack.cover) {
+    // Можно добавить поддержку кастомных картинок через assets
+  }
+  
   try {
     await rpc.setActivity(activity);
     sendMessage({ type: 'status', data: { playing: true, track: currentTrack } });
@@ -79,7 +82,6 @@ async function setActivity() {
   }
 }
 
-// Обработка входящих сообщений от расширения
 function handleMessages() {
   try {
     const msg = readMessage();
